@@ -3,24 +3,24 @@ import { FaRegMoon } from "react-icons/fa";
 
 function Nav() {
   return (
-    <header className="flex justify-between py-14 items-center">
+    <header className="flex justify-between py-14 items-center max-h-48 mb-14">
       <h1 className="text-3xl font-bold text-myblue">Learnera.</h1>
       <div>
         <a
           href="login"
-          className="text-xl mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
+          className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
         >
           Courses
         </a>
         <a
           href="login"
-          className="text-xl text-sky-600 font-semibold hover:border-b-4 border-green-600"
+          className="text-md pb-1 text-sky-600 font-semibold hover:border-b-4 border-green-600"
         >
           FAQ
         </a>
         <a
           href="login"
-          className="text-xl mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
+          className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
         >
           Blog
         </a>
