@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { FaArrowRight } from "react-icons/fa";
 
 function HomeScreen() {
   useEffect(() => {
@@ -17,7 +17,7 @@ function HomeScreen() {
   }, []);
 
   return (
-    <div>
+    <header>
       <div className="flex justify-between items-center">
         <div>
           <div className="rounded-full border border-sky-400 flex p-5 items-center mb-10">
@@ -34,8 +34,8 @@ function HomeScreen() {
           <p className="text-gray-400 mb-10 text-xl">
             An online platform where you can explore yourself.
           </p>
-          <button className="bg-sky-500 hover:bg-myblue transition-all ease-in rounded-l-full px-16 py-5 rounded-tr-full text-white text-xl">
-            Read More <AiOutlineArrowRight className="inline" />
+          <button className="bg-sky-500 hover:bg-myblue transition-all ease-in rounded-l-full px-16 py-5 rounded-tr-full text-white text-xl font-medium">
+            Read More <FaArrowRight className="inline" />
           </button>
         </div>
         <div className="w-[40%] relative overflow-hidden">
@@ -88,7 +88,7 @@ function HomeScreen() {
           <span className="text-gray-400 font-semibold">Earned From Us</span>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 
