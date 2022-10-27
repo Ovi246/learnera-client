@@ -37,7 +37,7 @@ const Register = () => {
         }
       })
       .catch((error) => {
-        console.error(error);
+        toast.error(error.code);
         setError(error.message);
       })
       .finally(() => {

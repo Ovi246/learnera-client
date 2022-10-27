@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -40,6 +41,9 @@ const AuthProvider = ({ children }) => {
   const verifyEmail = () => {
     return sendEmailVerification(auth.currentUser);
   };
+  const passwordReset = (email) => {
+    return sendPasswordResetEmail(auth.currentUser, email);
+  };
 
   const logOut = () => {
     setLoading(true);
@@ -56,7 +60,6 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
       }
       setLoading(false);
-      console.log(user);
     });
 
     return () => {
@@ -74,6 +77,7 @@ const AuthProvider = ({ children }) => {
     verifyEmail,
     createUser,
     signIn,
+    passwordReset,
   };
 
   return (

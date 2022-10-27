@@ -11,8 +11,13 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 
 const Register = () => {
-  const { createUser, verifyEmail, updateUserProfile, providerLogin } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    verifyEmail,
+    updateUserProfile,
+    providerLogin,
+    setLoading,
+  } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -72,10 +77,12 @@ const Register = () => {
         handleUpdateUserProfile(fullname, photo);
         handleEmailVerification();
         toast.success("Please verify your email address.");
+        setLoading(false);
       })
       .catch((error) => {
         const errorCode = error.code;
         toast(errorCode);
+        setLoading(false);
       });
   };
 
