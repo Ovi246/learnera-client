@@ -4,6 +4,9 @@ import HomeScreen from "../pages/HomeScreen";
 import FeaturedCourses from "../pages/FeaturedCourses";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import PrivateRoute from "../Routes/PrivateRoute";
+import Profile from "../pages/Profile";
+import AuthPrevent from "./AuthPrevent";
 
 export const routes = createBrowserRouter([
   {
@@ -16,11 +19,27 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Register />,
+        element: (
+          <AuthPrevent>
+            <Register />
+          </AuthPrevent>
+        ),
       },
       {
-        path: "/Login",
-        element: <Login />,
+        path: "/login",
+        element: (
+          <AuthPrevent>
+            <Login />
+          </AuthPrevent>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

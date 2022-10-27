@@ -2,13 +2,16 @@ import React, { useContext, useState } from "react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import { ErrorMessage } from "@hookform/error-message";
 import useTitle from "../hooks/useTitle";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 
 const Register = () => {
-  const { createUser, verifyEmail, updateUserProfile } =
+  const { createUser, verifyEmail, updateUserProfile, providerLogin } =
     useContext(AuthContext);
   const {
     register,
@@ -21,6 +24,43 @@ const Register = () => {
   const password = useRef();
   useTitle("Register");
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
+  const googleSignin = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          toast("Login Success");
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        toast(errorCode);
+      });
+  };
+  const githubSignin = () => {
+    providerLogin(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        if (user) {
+          toast("Login Success");
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        toast(errorCode);
+      });
+  };
+
   const onSubmit = (data) => {
     const { fullname, email, password, photoUrl } = data;
 
@@ -29,7 +69,6 @@ const Register = () => {
     const photo = photoUrl ? photoUrl : "/assets/images/photowing.com.png";
     createUser(email, password)
       .then((result) => {
-        console.log(result);
         handleUpdateUserProfile(fullname, photo);
         handleEmailVerification();
         toast.success("Please verify your email address.");
@@ -206,6 +245,18 @@ const Register = () => {
                 onClick={handleSubmit(onSubmit)}
               >
                 Register
+              </button>
+              <button
+                onClick={googleSignin}
+                className="bg-gray-200 rounded-lg px-4 py-2 mx-4"
+              >
+                <FcGoogle />
+              </button>
+              <button
+                onClick={githubSignin}
+                className="bg-gray-200 rounded-lg px-4 py-2"
+              >
+                <AiFillGithub />
               </button>
             </div>
           </form>

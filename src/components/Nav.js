@@ -15,7 +15,11 @@ function Nav() {
 
   return (
     <header className="flex justify-between py-14 items-center max-h-48 mb-14">
-      <h1 className="text-3xl font-bold text-myblue">Learnera.</h1>
+      <Link to="/">
+        <h1 className="cursor-pointer text-3xl font-bold text-myblue">
+          Learnera.
+        </h1>
+      </Link>
       <div>
         <a
           href="login"
@@ -38,12 +42,13 @@ function Nav() {
       </div>
       <div className="flex items-center">
         <FaRegMoon className="cursor-pointer" />
-        {user?.uid ? (
+        {user ? (
           <>
             <Link to="/profile">
               <img
                 src={user?.photoURL}
                 alt=""
+                title={user?.displayName}
                 className="w-[50px] h-[50px] rounded-full ml-5 cursor-pointer"
               />
             </Link>
