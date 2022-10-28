@@ -21,24 +21,21 @@ function Nav() {
         </h1>
       </Link>
       <div>
-        <a
-          href="login"
-          className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
-        >
-          Courses
-        </a>
-        <a
-          href="login"
-          className="text-md pb-1 text-sky-600 font-semibold hover:border-b-4 border-green-600"
-        >
-          FAQ
-        </a>
-        <a
-          href="login"
-          className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
-        >
-          Blog
-        </a>
+        <Link to="/courses">
+          <span className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600">
+            Courses
+          </span>
+        </Link>
+        <Link to="/faq">
+          <span className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600">
+            FAQ
+          </span>
+        </Link>
+        <Link to="/blog">
+          <span className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600">
+            Blog
+          </span>
+        </Link>
       </div>
       <div className="flex items-center">
         <FaRegMoon className="cursor-pointer" />
