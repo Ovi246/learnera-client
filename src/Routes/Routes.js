@@ -17,12 +17,29 @@ import Footer from "./../components/Footer";
 import FAQ from "../pages/FAQ";
 import Blog from "./../pages/Blog";
 import PageNotFound from "../pages/PageNotFound";
+import Checkout from "../pages/Checkout";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
     children: [
+      {
+        path: "/success",
+        element: (
+          <h1 className="text-5xl font-semibold text-center bg-gray-200 text-myblue p-5 rounded-lg">
+            Thanks for the Payment :) <br /> Stay tuned
+          </h1>
+        ),
+      },
+      {
+        path: "/cancel",
+        element: (
+          <h1 className="text-5xl font-semibold text-center bg-gray-200 text-myblue p-5 rounded-lg">
+            No problem visit us next time :) <br /> Stay tuned
+          </h1>
+        ),
+      },
       {
         path: "/register",
         element: (
@@ -48,12 +65,18 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/profile",
+        path: "/checkout/:categoryId/:courseId",
         element: (
           <PrivateRoute>
-            <Profile />
+            <Checkout />
           </PrivateRoute>
         ),
+        loader: async ({ params }) => {
+          const res = await fetch(
+            `http://localhost:5000/courses/${params.categoryId}/${params.courseId}`
+          );
+          return res.json();
+        },
       },
       {
         path: "/reset",

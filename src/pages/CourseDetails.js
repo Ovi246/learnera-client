@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
 import Pdf from "react-to-pdf";
 import { createRef } from "react";
@@ -10,8 +10,9 @@ function CourseDetails() {
 
   const courses = data.courses;
   const course_outline = data.courses.course_outline;
-  console.log(course_outline);
-  const { title, photo_url, description, price, lessons, students } = courses;
+
+  const { id, title, photo_url, description, price, lessons, students } =
+    courses;
 
   return (
     <div className="flex flex-col" ref={ref}>
@@ -27,9 +28,11 @@ function CourseDetails() {
             </div>
             <div className="flex-1 p-5">
               <p className="text-3xl mb-4 text-myblue font-bold">${price}</p>
-              <button className="bg-myblue w-full text-white p-2 mb-2">
-                Add to Cart
-              </button>
+              <Link to={`/checkout/${data.id}/${id}`}>
+                <button className="bg-myblue w-full text-white p-2 mb-2">
+                  GET PREMIUM ACCESS
+                </button>
+              </Link>
               <Pdf targetRef={ref} filename="course.pdf">
                 {({ toPdf }) => (
                   <button

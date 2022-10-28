@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { FaRegMoon } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 
 function Nav() {
@@ -21,21 +21,36 @@ function Nav() {
         </h1>
       </Link>
       <div>
-        <Link to="/courses">
-          <span className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600">
-            Courses
-          </span>
-        </Link>
-        <Link to="/faq">
-          <span className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600">
-            FAQ
-          </span>
-        </Link>
-        <Link to="/blog">
-          <span className="text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600">
-            Blog
-          </span>
-        </Link>
+        <NavLink
+          to="/courses"
+          className={({ isActive }) =>
+            isActive
+              ? "text-md pb-1 mx-5 text-sky-600 font-semibold border-b-4 border-green-600"
+              : "text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
+          }
+        >
+          <span>Courses</span>
+        </NavLink>
+        <NavLink
+          to="/faq"
+          className={({ isActive }) =>
+            isActive
+              ? "text-md pb-1 mx-5 text-sky-600 font-semibold border-b-4 border-green-600"
+              : "text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
+          }
+        >
+          <span>FAQ</span>
+        </NavLink>
+        <NavLink
+          to="/blog"
+          className={({ isActive }) =>
+            isActive
+              ? "text-md pb-1 mx-5 text-sky-600 font-semibold border-b-4 border-green-600"
+              : "text-md pb-1 mx-5 text-sky-600 font-semibold hover:border-b-4 border-green-600"
+          }
+        >
+          <span>Blog</span>
+        </NavLink>
       </div>
       <div className="flex items-center">
         <FaRegMoon className="cursor-pointer" />
