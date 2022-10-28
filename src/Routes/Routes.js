@@ -14,6 +14,9 @@ import Nav from "./../components/Nav";
 import CourseDetails from "./../pages/CourseDetails";
 import Reset from "./../pages/Reset";
 import Footer from "./../components/Footer";
+import FAQ from "../pages/FAQ";
+import Blog from "./../pages/Blog";
+import PageNotFound from "../pages/PageNotFound";
 
 export const routes = createBrowserRouter([
   {
@@ -56,6 +59,14 @@ export const routes = createBrowserRouter([
         path: "/reset",
         element: <Reset />,
       },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
     ],
   },
   {
@@ -84,6 +95,7 @@ export const routes = createBrowserRouter([
         </div>
         <div className="container mx-auto">
           <Sidebar />
+          <Footer />
         </div>
       </>
     ),
@@ -121,5 +133,9 @@ export const routes = createBrowserRouter([
       const res = await fetch("http://localhost:5000/courses");
       return res.json();
     },
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
