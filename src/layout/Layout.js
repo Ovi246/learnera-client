@@ -8,7 +8,7 @@ function Layout() {
     <div className="container mx-auto px-48">
       <Nav />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

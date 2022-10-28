@@ -26,6 +26,7 @@ function Profile() {
       .then(() => {})
       .catch((error) => console.error(error));
   };
+
   return (
     <div>
       <div className="h-full">

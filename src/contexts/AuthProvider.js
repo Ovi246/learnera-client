@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
     return sendEmailVerification(auth.currentUser);
   };
   const passwordReset = (email) => {
-    return sendPasswordResetEmail(auth.currentUser, email);
+    return sendPasswordResetEmail(auth, email);
   };
 
   const logOut = () => {

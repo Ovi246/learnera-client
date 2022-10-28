@@ -12,6 +12,8 @@ import Sidebar from "../components/Sidebar";
 import CourseCategory from "../pages/CourseCategory";
 import Nav from "./../components/Nav";
 import CourseDetails from "./../pages/CourseDetails";
+import Reset from "./../pages/Reset";
+import Footer from "./../components/Footer";
 
 export const routes = createBrowserRouter([
   {
@@ -50,6 +52,10 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/reset",
+        element: <Reset />,
+      },
     ],
   },
   {
@@ -59,6 +65,9 @@ export const routes = createBrowserRouter([
       <>
         <HomeScreen />
         <FeaturedCourses />
+        <div className="container mx-auto px-48">
+          <Footer />
+        </div>
       </>
     ),
     loader: async () => {

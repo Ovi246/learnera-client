@@ -1,9 +1,12 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
+import Pdf from "react-to-pdf";
+import { createRef } from "react";
 
 function CourseDetails() {
   const data = useLoaderData();
+  const ref = createRef();
 
   const courses = data.courses;
   const course_outline = data.courses.course_outline;
@@ -11,7 +14,7 @@ function CourseDetails() {
   const { title, photo_url, description, price, lessons, students } = courses;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" ref={ref}>
       <div className="mx-5 relative bg-[#1c1d1f] rounded-lg p-5 min-w-[80%] max-h-[232px]">
         <div className="w-[50%] p-2 text-white">
           <h2 className="text-2xl mb-2">{title}</h2>
@@ -27,9 +30,17 @@ function CourseDetails() {
               <button className="bg-myblue w-full text-white p-2 mb-2">
                 Add to Cart
               </button>
-              <button className="bg-orange-400 w-full text-white p-2 mb-4">
-                Download PDF
-              </button>
+              <Pdf targetRef={ref} filename="course.pdf">
+                {({ toPdf }) => (
+                  <button
+                    onClick={toPdf}
+                    className="bg-orange-400 w-full text-white p-2 mb-4"
+                  >
+                    Download PDF
+                  </button>
+                )}
+              </Pdf>
+
               <p className="text-lg font-semibold">This course includes:</p>
               <span>Lessons: {lessons}</span>
             </div>

@@ -3,8 +3,11 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../contexts/AuthProvider";
 import { ErrorMessage } from "@hookform/error-message";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 import useTitle from "../hooks/useTitle";
 
 const Register = () => {
@@ -16,11 +19,44 @@ const Register = () => {
 
   const password = useRef();
   const [error, setError] = useState("");
-  const { signIn, setLoading } = useContext(AuthContext);
+  const { signIn, setLoading, providerLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   useTitle("Login");
   const from = location.state?.from?.pathname || "/";
+
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
+  const googleSignin = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          toast("Login Success");
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        toast(errorCode);
+      });
+  };
+  const githubSignin = () => {
+    providerLogin(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        if (user) {
+          toast("Login Success");
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        toast(errorCode);
+      });
+  };
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -123,21 +159,38 @@ const Register = () => {
                   }
                 />
               </div>
+              <Link to="/reset">
+                <span className="text-sm text-gray-400 text-underline hover:border-b-2">
+                  Forgot Password?
+                </span>
+              </Link>
             </div>
 
             <div className="flex items-center justify-end mt-4">
-              <a
+              <Link
                 className="text-sm text-gray-600 underline hover:text-gray-900"
-                href="/register"
+                to="/register"
               >
                 Signup Today
-              </a>
+              </Link>
               <button
                 type="submit"
                 className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
                 onClick={handleSubmit(onSubmit)}
               >
                 Login
+              </button>
+              <button
+                onClick={googleSignin}
+                className="bg-gray-200 rounded-lg px-4 py-2 mx-4"
+              >
+                <FcGoogle />
+              </button>
+              <button
+                onClick={githubSignin}
+                className="bg-gray-200 rounded-lg px-4 py-2"
+              >
+                <AiFillGithub />
               </button>
             </div>
           </form>
